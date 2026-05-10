@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="src/styles/style.css" />
   <link rel="stylesheet" href="src/styles/pages.css" />
   <link rel="stylesheet" href="src/styles/modals.css" />
+  <link rel="stylesheet" href="src/styles/responsive.css" />
 </head>
 <body>
 
@@ -33,7 +34,7 @@
       <nav class="header__nav">
         <a href="#catalog"    class="nav__link nav__link--active" data-route="catalog">Каталог</a>
         <a href="#sales"      class="nav__link" data-route="sales">Акції</a>
-        <a href="#calculator" class="nav__link nav__link--calc" data-route="calculator">Калькулятор</a>
+        <a href="#calculator" class="nav__link nav__link--calc" data-route="calculator">🧮 Калькулятор</a>
         <a href="#projects"   class="nav__link" data-route="projects">Проєкти</a>
         <a href="#contacts"   class="nav__link" data-route="contacts">Контакти</a>
       </nav>
@@ -89,6 +90,15 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+
+        <!-- Burger (тільки мобільний) -->
+        <button class="header__burger" id="burgerBtn" aria-label="Меню" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
 

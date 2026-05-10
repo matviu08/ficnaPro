@@ -8,6 +8,7 @@ import { initHeader }    from './js/components/header.js';
 import { initSidebar }   from './js/components/sidebar.js';
 import { initAuth }      from './js/components/auth.js';
 import { initQuickView } from './js/components/quick-view.js';
+import { initMobile }    from './js/components/mobile.js';
 import { seedDemoUser }  from './js/data/users.js';
 
 import { registerRoute, initRouter } from './js/router.js';
@@ -32,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCart();
   initWishlist();
   initCompare();
-  initAuth();        // ← Авторизація
-  initQuickView();   // ← Швидкий перегляд
+  initAuth();
+  initQuickView();
+  initMobile();    // ← Мобільна навігація
   initHeader();
   initSidebar();
 
