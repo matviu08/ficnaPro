@@ -798,4 +798,4 @@
 /* На десктопі hidden через клас = display:none */
 @media (min-width: 769px) {
   .sidebar--hidden { display: none !important; }
-                   }
+     }
