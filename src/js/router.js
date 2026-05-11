@@ -30,13 +30,12 @@ async function renderPage() {
     a.classList.toggle('nav__link--active', a.dataset.route === hash);
   });
 
-  // Показати / сховати sidebar
+  // Показати / сховати sidebar (тільки для каталогу)
   const sidebar = document.getElementById('sidebar');
   const layout  = document.querySelector('.layout');
   if (sidebar) {
     const showSidebar = hash === 'catalog';
-    // Використовуємо клас замість inline style щоб не конфліктувати з responsive.css
-    sidebar.classList.toggle('sidebar--hidden', !showSidebar);
+    sidebar.style.display = showSidebar ? '' : 'none';
     layout?.classList.toggle('layout--no-sidebar', !showSidebar);
   }
 
