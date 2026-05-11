@@ -1,9 +1,8 @@
 // ============================================================
 //  router.js — SPA hash-роутер
-//  Формат URL: /#catalog  /#sales  /#projects  /#contacts
 // ============================================================
 
-const routes = {};  // { hash: { render, init } }
+const routes = {};
 let currentHash = '';
 
 export function registerRoute(hash, { render, init }) {
@@ -19,32 +18,42 @@ function resolveHash() {
 }
 
 async function renderPage() {
-  const hash   = resolveHash();
-  const route  = routes[hash] || routes['catalog'];
+  const hash  = resolveHash();
+  const route = routes[hash] || routes['catalog'];
 
   if (hash === currentHash) return;
   currentHash = hash;
 
-  // Оновити активне посилання у nav
+  // Активний nav-link
   document.querySelectorAll('.nav__link[data-route]').forEach(a => {
     a.classList.toggle('nav__link--active', a.dataset.route === hash);
   });
 
-  // Показати / сховати sidebar (тільки для каталогу)
+  // Sidebar: на десктопі показуємо/ховаємо через display
+  // На мобільному (≤768px) sidebar керується mobile.js через sidebar--open клас
   const sidebar = document.getElementById('sidebar');
   const layout  = document.querySelector('.layout');
   if (sidebar) {
     const showSidebar = hash === 'catalog';
-    sidebar.style.display = showSidebar ? '' : 'none';
+    if (window.innerWidth > 768) {
+      sidebar.style.display = showSidebar ? '' : 'none';
+    } else {
+      // Мобільний: просто закрити drawer якщо перейшли на іншу сторінку
+      if (!showSidebar) {
+        sidebar.classList.remove('sidebar--open');
+        document.getElementById('sidebarOverlay')
+          ?.classList.remove('sidebar-overlay--visible');
+        document.body.style.overflow = '';
+      }
+    }
     layout?.classList.toggle('layout--no-sidebar', !showSidebar);
   }
 
-  // Контейнер контенту
+  // Fade-out
   const main = document.getElementById('mainContent');
   if (!main || !route) return;
 
-  // Анімація fade-out
-  main.style.opacity = '0';
+  main.style.opacity   = '0';
   main.style.transform = 'translateY(6px)';
   main.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
 
@@ -52,18 +61,14 @@ async function renderPage() {
 
   main.innerHTML = await route.render();
 
-  // Анімація fade-in
   requestAnimationFrame(() => {
-    main.style.opacity = '1';
+    main.style.opacity   = '1';
     main.style.transform = 'translateY(0)';
   });
 
   if (route.init) route.init();
 
-  // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Breadcrumb
   updateBreadcrumb(hash);
 }
 
@@ -81,9 +86,8 @@ function updateBreadcrumb(hash) {
 
 export function initRouter() {
   window.addEventListener('hashchange', renderPage);
-  renderPage(); // Початковий рендер
+  renderPage();
 
-  // Клік на nav-посилання
   document.querySelectorAll('.nav__link[data-route]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();

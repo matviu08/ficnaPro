@@ -18,11 +18,6 @@
   animation: fadeInUp 0.3s ease both;
 }
 
-/* Коли sidebar прихований — main займає всю ширину */
-#sidebar[style*="display: none"] ~ #mainContent,
-.layout:has(#sidebar[style*="display: none"]) {
-  grid-column: 1 / -1;
-}
 
 /* ─── 2. Sales Page ─── */
 .sales-hero {
@@ -777,21 +772,6 @@
 .toast--warn    { background: var(--color-accent); }
 
 /* ─── Responsive ─── */
-@media (max-width: 900px) {
-  .contact-form-wrap   { grid-template-columns: 1fr; }
-  .contact-form-info   { border-right: none; padding-right: 0; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-5); }
-  .projects-stats      { grid-template-columns: repeat(2, 1fr); }
-  .compare-modal       { width: 95vw; max-height: 92vh; }
-}
-
-@media (max-width: 600px) {
-  .sale-banner         { flex-direction: column; align-items: flex-start; }
-  .sale-countdown      { align-items: flex-start; }
-  .form-row            { grid-template-columns: 1fr; }
-  .hotline-banner      { flex-direction: column; }
-  .hotline-banner__actions { flex-direction: column; width: 100%; }
-}
-
 /* ─── Layout: full-width коли sidebar прихований ─── */
 .layout--no-sidebar {
   grid-template-columns: 1fr;
@@ -1525,17 +1505,3 @@
 .calc-restart-btn:hover { color: var(--color-primary); border-color: var(--color-primary); background: var(--color-primary-light); }
 
 /* ── Responsive ── */
-@media (max-width: 960px) {
-  .calc-layout { grid-template-columns: 1fr; }
-  .calc-sidebar { position: static; }
-  .calc-hero    { flex-direction: column; padding: var(--space-6); }
-  .calc-hero__badges { flex-direction: row; flex-wrap: wrap; }
-}
-@media (max-width: 600px) {
-  .calc-step-wrap { padding: var(--space-5); }
-  .calc-cards-grid, .calc-opening-grid, .calc-sash-grid { grid-template-columns: 1fr 1fr; }
-  .calc-color-grid  { grid-template-columns: repeat(3, 1fr); }
-  .calc-size-row    { flex-direction: column; }
-  .calc-result__grid { grid-template-columns: 1fr; }
-  .calc-result__actions { flex-direction: column; }
-}
